@@ -10,7 +10,7 @@ void setup()
 void loop()
 {
    
- while(digitalRead(switch1)==1)
+ while(digitalRead(switch1)==0)
   {
    
     Serial.println(alpha[i]);

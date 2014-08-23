@@ -6,10 +6,9 @@ void setup ()
 {
   Serial3.begin(9600);
   Serial.begin(9600);
-  uint8_t init[] = {0xFE,0x58,0xfe,0x47,8,3};
+  uint8_t init[] = {254,88,254,110,254,35,9,7,254,66,0};
   
-  Serial3.write(init,6);
-  Serial3.write("test");
+  Serial3.write(init,11);
 
   return; 
 }

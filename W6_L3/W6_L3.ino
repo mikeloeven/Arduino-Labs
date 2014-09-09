@@ -10,8 +10,8 @@ int OPB = 5;
 //Write Out Title
 void title ()
 {
-   locate(7,2);
-   Serial3.write("DC Motor");
+   locate(1,1);
+   Serial3.write("DC Motor Speed ");
 }
 
 //sets cursor POS
@@ -67,27 +67,30 @@ void loop ()
   {
     analogWrite(IN1,0);
     analogWrite(IN2,255);
-    analogWrite(EN,255);
-    clrRow(4);
-    locate(1,4);
-    Serial3.write("clockwise");
   }
   else if (digitalRead(SW2)==0)
   {
     analogWrite(IN1,255);
     analogWrite(IN2,0);
-    analogWrite(EN,255);
-    clrRow(4);
-    locate(1,4);
-    Serial3.write("counter clockwise");
   }
   else if (digitalRead(SW0)==0)
   {
     analogWrite(IN1,0);
     analogWrite(IN2,0);
-    analogWrite(EN,0);
-    clrRow(4);
-    locate(1,4);
-    Serial3.write("Off");
+
   }
+  int spdMotor= map(analogRead(7),0,1023,0,255);
+  int spdDisp= map(analogRead(7),0,1023,0,100);
+  delay(100);
+  analogWrite(EN,spdMotor);
+  delay(100);
+  
+  locate(16,1);
+  Serial3.write("   ");
+  locate(16,1);
+  Serial3.print(spdDisp);
+  uint8_t Graph[] = {0xFE,0x68,0xFE,0x7C,1,3,0,spdDisp};
+  Serial3.write(Graph,8);
+  
+
 }
